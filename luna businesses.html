@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stori Luna - Market Research Report v3.1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; color: #333; line-height: 1.6; background: #f5f5f5; }
+        .page { background: white; margin: 20px auto; padding: 60px; max-width: 1200px; box-shadow: 0 0 20px rgba(0,0,0,0.1); page-break-after: always; }
+        .cover { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, #00a854 0%, #1b7a3d 100%); color: white; padding: 60px; }
+        h1 { color: #1b7a3d; font-size: 2.2em; margin-bottom: 30px; border-bottom: 3px solid #00a854; padding-bottom: 15px; }
+        h2 { color: #00a854; font-size: 1.6em; margin-top: 40px; margin-bottom: 20px; }
+        h3 { color: #1b7a3d; font-size: 1.3em; margin-top: 20px; margin-bottom: 10px; }
+        .cover h1 { font-size: 3.5em; margin-bottom: 20px; font-weight: 700; border: none; }
+        .cover .subtitle { font-size: 1.8em; margin-bottom: 40px; font-weight: 300; opacity: 0.95; }
+        .executive-summary { background: #f0f9f6; padding: 30px; border-left: 4px solid #00a854; margin: 30px 0; }
+        .summary-stat { display: inline-block; margin: 15px 30px 15px 0; font-size: 1.1em; }
+        .summary-stat .number { font-size: 2em; font-weight: 700; color: #00a854; }
+        .question-title { font-size: 1.3em; font-weight: 600; color: #1b7a3d; margin-bottom: 20px; padding: 15px; background: #f0f9f6; }
+        .q-meta { font-size: 0.9em; color: #666; margin-bottom: 15px; padding: 10px; background: #f5f5f5; border-left: 3px solid #00a854; }
+        .chart-container { position: relative; height: 400px; margin: 30px 0; }
+        .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95em; }
+        .data-table th { background: #00a854; color: white; padding: 12px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+        .data-table tr:hover { background: #f9f9f9; }
+        .data-table .pct { color: #00a854; font-weight: 600; }
+        .data-table-note { font-size: 0.85em; color: #666; padding: 10px 0; margin-top: 5px; }
+        .footnote { font-size: 0.85em; color: #666; margin: 15px 0; padding: 10px; background: #fff9e6; border-left: 3px solid #ff9800; }
+        .asterisk-marker { color: #f44336; font-weight: bold; }
+        .insights { background: #e8f5e9; padding: 20px; border-left: 4px solid #4caf50; margin: 20px 0; }
+        .insights h4 { color: #1b7a3d; margin-bottom: 10px; }
+        .insights ul { margin-left: 20px; }
+        .insights li { margin: 8px 0; color: #333; }
+        .definition-box { background: #fff9e6; padding: 15px; border-left: 4px solid #ff9800; margin: 15px 0; font-size: 0.95em; }
+        .definition-box strong { color: #1b7a3d; }
+        .ranking-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
+        .ranking-table th { background: #00a854; color: white; padding: 12px; text-align: left; font-weight: 600; }
+        .ranking-table td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+        .ranking-table tr:hover { background: #f9f9f9; }
+        .top-5-box { background: #e8f5e9; padding: 20px; border-left: 4px solid #00a854; margin: 20px 0; }
+        .top-5-item { background: white; padding: 15px; margin: 10px 0; border-left: 4px solid #00a854; }
+        .top-5-item .rank { font-size: 1.5em; font-weight: bold; color: #00a854; margin-right: 10px; }
+        .top-5-item .name { font-size: 1.1em; font-weight: 600; color: #1b7a3d; }
+        .top-5-item .metrics { font-size: 0.9em; color: #666; margin: 8px 0; }
+        .top-5-item .reason { font-size: 0.95em; color: #333; margin-top: 8px; }
+        .footer { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #ddd; color: #999; font-size: 0.9em; }
+        @media print { .page { page-break-after: always; margin: 0; box-shadow: none; } body { background: white; } }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="page cover">
+    <h1>STORI LUNA</h1>
+    <div class="subtitle">Market Research Report v3.1</div>
+    <div style="margin-top: 40px; font-size: 1.2em;">
+        <p><strong>267 respondents with own business</strong></p>
+        <p style="margin-top: 10px; font-size: 0.95em; opacity: 0.9;">From total survey sample of 642</p>
+        <p style="margin-top: 30px; font-size: 1em;">June 3-4, 2026</p>
+    </div>
+    <div style="margin-top: 80px; font-size: 0.9em; font-weight: 300; letter-spacing: 2px;">UX RESEARCH</div>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="page">
+    <h1>Executive Summary</h1>
+    
+    <div class="executive-summary">
+        <div class="summary-stat">
+            <div class="number">267</div>
+            <div class="label">Business Owners Analyzed</div>
+        </div>
+        <div class="summary-stat">
+            <div class="number">81%</div>
+            <div class="label">Positive Satisfaction</div>
+        </div>
+        <div class="summary-stat">
+            <div class="number">43%</div>
+            <div class="label">Recurring Financing Need</div>
+        </div>
+        <div class="summary-stat">
+            <div class="number">78%</div>
+            <div class="label">Want $10k+ for business</div>
+        </div>
+    </div>
+    
+    <h2>Key Insights</h2>
+    <ul style="margin-left: 20px; margin-top: 20px;">
+        <li><strong>Retail dominates recurring need (59%):</strong> Inventory-driven businesses with 2-3 month cycles require revolving credit solutions. 46 users, highest volume opportunity.</li>
+        
+        <li><strong>Manufacturing segment is quality leader (87% satisfaction):</strong> Textile producers, furniture makers, food manufacturers show strongest product fit. They maintain bank deposits, have formal documentation, and show 43% recurrent need. Example: A carpenter using loans to buy specialty wood and tools every 2-3 months sees predictable income and plans multi-month projects.</li>
+        
+        <li><strong>Food & Beverages shows growth focus:</strong> 36% use loans to expand operations, highest expansion rate. 45% want $20k+ loans, indicating ambition to scale from stand/home-based to permanent location.</li>
+        
+        <li><strong>Professional Services at risk (67% satisfaction):</strong> Business/personal loan blending causes friction. 29% use loans for personal expenses (vs 13% overall), indicating product-market misalignment.</li>
+        
+        <li><strong>Online Resale requires digital-native approach (60% satisfaction):</strong> Smallest segment with lowest satisfaction and lowest recurrent need (30%), lowest loan amounts ($10-15k preference). Needs mobile-first UX, fast approvals.</li>
+    </ul>
+    
+    <div class="footnote"><strong>Methodology note:</strong> All percentages shown with count basis. Base totals (n) displayed in table footers. Segments with n&lt;30 marked with asterisk (<span class="asterisk-marker">*</span>) and noted as non-representative samples.</div>
+    
+    <div class="footer">Page 1 | Stori Luna Market Research v3.1</div>
+</div>
+
+<!-- Q1: INCOME SOURCES -->
+<div class="page">
+    <h1>Current Income Sources</h1>
+    
+    <div class="q-meta"><strong>Base:</strong> 267 business owners (from total sample of 642 respondents)</div>
+    
+    <table class="data-table">
+        <tr>
+            <th>Income Source</th>
+            <th>Count</th>
+            <th>%</th>
+        </tr>
+        <tr style="background: #f0f9f6;"><td><strong>Own business only</strong></td><td><strong>166</strong></td><td class="pct"><strong>62%</strong></td></tr>
+        <tr><td>Business + Full-time employment</td><td>30</td><td class="pct">11%</td></tr>
+        <tr><td>Business + Family support</td><td>14</td><td class="pct">5%</td></tr>
+        <tr><td>Business + Part-time employment</td><td>12</td><td class="pct">4%</td></tr>
+        <tr><td>Business + Multiple other sources</td><td>45</td><td class="pct">17%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267</div>
+    
+    <div class="insights">
+        <h4>Finding</h4>
+        <ul>
+            <li><strong>62% depend solely on business:</strong> High risk/high growth segment, vulnerable to downturns</li>
+            <li><strong>38% have secondary income:</strong> Provides cash flow stabilization and higher borrowing capacity</li>
+        </ul>
+    </div>
+    
+    <div class="footer">Page 2 | Stori Luna Market Research v3.1</div>
+</div>
+
+<!-- Q2: BUSINESS TYPES -->
+<div class="page">
+    <h1>Business Types - Complete Breakdown</h1>
+    
+    <div class="q-meta"><strong>Base:</strong> 267 respondents | All responses coded into categories</div>
+    
+    <table class="data-table" style="font-size: 0.85em;">
+        <tr>
+            <th>Business Category</th>
+            <th>Count</th>
+            <th>%</th>
+            <th>What They Sell / Do</th>
+        </tr>
+        <tr style="background: #f0f9f6;"><td><strong>Retail Store</strong></td><td><strong>46</strong></td><td class="pct"><strong>17%</strong></td><td>Clothing, accessories, home goods, electronics</td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Personal Services</strong></td><td><strong>42</strong></td><td class="pct"><strong>16%</strong></td><td>Beauty, cleaning, transport, repairs, care</td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Food & Beverages</strong></td><td><strong>33</strong></td><td class="pct"><strong>12%</strong></td><td>Restaurant, cafe, pastry, food stand</td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Manufacturing</strong></td><td><strong>30</strong></td><td class="pct"><strong>11%</strong></td><td>Handcrafts, carpentry, textiles, elaborated foods</td></tr>
+        <tr><td><strong>Professional / Digital</strong></td><td><strong>21</strong></td><td class="pct"><strong>8%</strong></td><td>Design, marketing, programming, consulting</td></tr>
+        <tr><td><strong>Catalog / Direct Sales</strong> <span class="asterisk-marker">*</span></td><td><strong>18</strong></td><td class="pct"><strong>7%</strong></td><td>Natura, Avon, Mary Kay, Jafra, supplements</td></tr>
+        <tr><td><strong>Minimarket / Small Store</strong> <span class="asterisk-marker">*</span></td><td><strong>15</strong></td><td class="pct"><strong>6%</strong></td><td>Abarrotes, dairy, household items</td></tr>
+        <tr><td><strong>Online Resale</strong> <span class="asterisk-marker">*</span></td><td><strong>10</strong></td><td class="pct"><strong>4%</strong></td><td>Mercado Libre, Amazon, Facebook, Instagram</td></tr>
+        <tr><td><strong>Real Estate / Leasing</strong> <span class="asterisk-marker">*</span></td><td><strong>2</strong></td><td class="pct"><strong>1%</strong></td><td>Property rental</td></tr>
+        <tr><td><strong>Agriculture / Livestock</strong> <span class="asterisk-marker">*</span></td><td><strong>4</strong></td><td class="pct"><strong>1%</strong></td><td>Farming, cattle, fishing</td></tr>
+        <tr style="background: #fff3e0;"><td><strong>Other Specialized</strong></td><td><strong>46</strong></td><td class="pct"><strong>17%</strong></td><td>Construction, transport, auto repair, pharmacy, etc.</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267</div>
+    
+    <div class="footnote"><span class="asterisk-marker">*</span> Segments with n&lt;30 are marked with asterisk. These samples are not fully representative and should be treated as exploratory data only. Use for hypothesis generation, not for strategic decisions.</div>
+    
+    <div class="footer">Page 3 | Stori Luna Market Research v3.1</div>
+</div>
+
+<!-- BUSINESS PROFILES WITH METRICS -->
+<div class="page">
+    <h1>Business Category Profiles - Detailed Metrics</h1>
+    
+    <div class="definition-box">
+        <h3>🏬 RETAIL STORE (n=46 | 17% of base)</h3>
+        <p><strong>What They Sell:</strong> Clothing, shoes, accessories, jewelry, electronics, home decor in physical stores</p>
+        <p><strong>Financing Frequency:</strong> Every 2-3 months (37%), 1-2x/year (30%), Almost monthly (22%) | <strong>Recurrent need: 59%</strong></p>
+        <p><strong>Preferred Loan Size:</strong> $15-20k average | 48% want $20k+, 35% want $10-20k</p>
+        <p><strong>Satisfaction with Stori:</strong> 83% (38/46 Excellent+Good) | 50% rate Excellent</p>
+    </div>
+    
+    <div class="definition-box">
+        <h3>💅 PERSONAL SERVICES (n=42 | 16% of base)</h3>
+        <p><strong>What They Sell:</strong> Beauty (nails, hair, waxing - 40%), cleaning, transport, repairs, massage, childcare</p>
+        <p><strong>Financing Frequency:</strong> 1-2x/year (38%), Every 2-3 months (31%), Almost monthly (14%) | <strong>Recurrent need: 45%</strong></p>
+        <p><strong>Preferred Loan Size:</strong> $10-20k | Even split between $10-20k and $20k+ (38% each)</p>
+        <p><strong>Satisfaction with Stori:</strong> 81% (34/42 Excellent+Good)</p>
+    </div>
+    
+    <div class="definition-box">
+        <h3>🍔 FOOD & BEVERAGES (n=33 | 12% of base)</h3>
+        <p><strong>What They Sell:</strong> Traditional meals (quesadillas, birria, tamales - 35%), baked goods (20%), beverages (15%)</p>
+        <p><strong>Financing Frequency:</strong> 1-2x/year (45% - seasonal), Every 2-3 months (27%), Almost monthly (12%) | <strong>Recurrent need: 39%</strong></p>
+        <p><strong>Preferred Loan Size:</strong> $15-20k | 45% want $20k+, growth-focused</p>
+        <p><strong>Satisfaction with Stori:</strong> 85% (28/33 Excellent+Good)</p>
+    </div>
+    
+    <div class="definition-box">
+        <h3>🏭 MANUFACTURING / PRODUCTION (n=30 | 11% of base)</h3>
+        <p><strong>What They Make:</strong> Textiles/clothing (25%), furniture/carpentry (20%), food production (20%), handcrafts (15%)</p>
+        <p><strong>Financing Frequency:</strong> 1-2x/year (43%), Every 2-3 months (27%), Almost monthly (17%) | <strong>Recurrent need: 43%</strong></p>
+        <p><strong>Preferred Loan Size:</strong> $15-20k | 43% want $20k+, 33% want $10-20k</p>
+        <p><strong>Satisfaction with Stori:</strong> 87% (26/30 Excellent+Good) | <strong>HIGHEST among major segments</strong> | 60% rate Excellent</p>
+    </div>
+    
+    <div class="definition-box">
+        <h3>💻 PROFESSIONAL / DIGITAL SERVICES (n=21 | 8% of base) <span class="asterisk-marker">*</span></h3>
+        <p><strong>What They Sell:</strong> Real estate (30%), creative/design (25%), technology/programming (15%), consulting (15%)</p>
+        <p><strong>Financing Frequency:</strong> 1-2x/year (33%), Don't need (29%), Almost monthly (24%), Every 2-3 months (14%) | <strong>Recurrent need: 38%</strong></p>
+        <p><strong>Preferred Loan Size:</strong> $10-20k | 43% want $10-20k, 38% want $20k+</p>
+        <p><strong>Satisfaction with Stori:</strong> 67% (14/21 Excellent+Good) | <strong>LOWEST satisfaction</strong> - friction from business/personal blending</p>
+    </div>
+    
+    <div class="definition-box">
+        <h3>📦 CATALOG / DIRECT SALES (n=18 | 7% of base) <span class="asterisk-marker">*</span></h3>
+        <p><strong>What They Sell:</strong> Natura, Avon, Mary Kay, Jafra - MLM/direct sales model</p>
+        <p><strong>Financing Frequency:</strong> 1-2x/year (39%), Every 2-3 months (28%), Almost monthly (11%) | <strong>Recurrent need: 39%</strong></p>
+        <p><strong>Preferred Loan Size:</strong> $10-20k | Balanced between $10-20k and $20k+ (39% each)</p>
+        <p><strong>Satisfaction with Stori:</strong> 83% (15/18 Excellent+Good) | 61% rate Excellent</p>
+    </div>
+    
+    <div class="definition-box">
+        <h3>🛒 MINIMARKET / SMALL STORE (n=15 | 6% of base) <span class="asterisk-marker">*</span></h3>
+        <p><strong>What They Sell:</strong> Abarrotes (dry goods), dairy products, beverages, convenience items</p>
+        <p><strong>Financing Frequency:</strong> 1-2x/year (40%), Don't need (33%), Every 2-3 months (20%), Almost monthly (7%) | <strong>Recurrent need: 27%</strong></p>
+        <p><strong>Preferred Loan Size:</strong> $15-20k | 47% want $20k+</p>
+        <p><strong>Satisfaction with Stori:</strong> 87% (13/15 Excellent+Good)</p>
+    </div>
+    
+    <div class="definition-box">
+        <h3>📱 ONLINE RESALE (n=10 | 4% of base) <span class="asterisk-marker">*</span></h3>
+        <p><strong>What They Sell:</strong> Mercado Libre, Amazon, Facebook/Instagram shops - clothing, electronics, skincare</p>
+        <p><strong>Financing Frequency:</strong> 1-2x/year (60%), Almost monthly (20%), Every 2-3 months (10%) | <strong>Recurrent need: 30%</strong></p>
+        <p><strong>Preferred Loan Size:</strong> $10-15k average | 60% want $10-20k, only 10% want $20k+</p>
+        <p><strong>Satisfaction with Stori:</strong> 60% (6/10 Excellent+Good) | <strong>LOWEST satisfaction</strong></p>
+    </div>
+    
+    <div class="footnote"><span class="asterisk-marker">*</span> Sample size &lt;30 - not statistically representative. Use for exploratory insights only.</div>
+    
+    <div class="footer">Page 4-5 | Stori Luna Market Research v3.1</div>
+</div>
+
+<!-- RECURRING NEED RANKING -->
+<div class="page">
+    <h1>Segment Ranking by Size, Then Recurrent Need</h1>
+    
+    <div class="q-meta"><strong>Recurrent need = financing needed every 2-3 months OR almost every month</strong></div>
+    
+    <table class="ranking-table">
+        <tr>
+            <th>Rank</th>
+            <th>Business Type</th>
+            <th>Size (n)</th>
+            <th>% of Base</th>
+            <th>Recurrent %</th>
+            <th>Recurrent Users</th>
+            <th>Primary Driver</th>
+        </tr>
+        <tr style="background: #f0f9f6;"><td><strong>1</strong></td><td><strong>Retail Store</strong></td><td>46</td><td>17%</td><td class="pct">59%</td><td>27</td><td>Inventory turnover</td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>2</strong></td><td><strong>Personal Services</strong></td><td>42</td><td>16%</td><td class="pct">45%</td><td>19</td><td>Equipment/supplies</td></tr>
+        <tr><td><strong>3</strong></td><td><strong>Food & Beverages</strong></td><td>33</td><td>12%</td><td class="pct">39%</td><td>13</td><td>Seasonal + ingredients</td></tr>
+        <tr><td><strong>4</strong></td><td><strong>Manufacturing</strong></td><td>30</td><td>11%</td><td class="pct">43%</td><td>13</td><td>Raw materials</td></tr>
+        <tr><td><strong>5</strong></td><td><strong>Professional Services</strong> <span class="asterisk-marker">*</span></td><td>21</td><td>8%</td><td class="pct">38%</td><td>8</td><td>Project cycles</td></tr>
+        <tr><td><strong>6</strong></td><td><strong>Catalog / Direct Sales</strong> <span class="asterisk-marker">*</span></td><td>18</td><td>7%</td><td class="pct">39%</td><td>7</td><td>Inventory cycles</td></tr>
+        <tr><td><strong>7</strong></td><td><strong>Minimarket</strong> <span class="asterisk-marker">*</span></td><td>15</td><td>6%</td><td class="pct">27%</td><td>4</td><td>Stable state</td></tr>
+        <tr><td><strong>8</strong></td><td><strong>Online Resale</strong> <span class="asterisk-marker">*</span></td><td>10</td><td>4%</td><td class="pct">30%</td><td>3</td><td>Lower capital needs</td></tr>
+    </table>
+    
+    <div class="footnote"><span class="asterisk-marker">*</span> Sample n&lt;30, exploratory data only</div>
+    
+    <div class="footer">Page 6 | Stori Luna Market Research v3.1</div>
+</div>
+
+<!-- Q7: SATISFACTION BY TYPE -->
+<div class="page">
+    <h1>Satisfaction with Stori - By Business Type</h1>
+    
+    <div class="q-meta"><strong>Base:</strong> Varies by segment | Shows Excellent + Good ratings</div>
+    
+    <table class="ranking-table">
+        <tr>
+            <th>Rank</th>
+            <th>Business Type</th>
+            <th>Sample</th>
+            <th>Excellent+Good</th>
+            <th>Satisfaction %</th>
+            <th>Excellent Only</th>
+            <th>Passive/Bad</th>
+        </tr>
+        <tr style="background: #e8f5e9;"><td><strong>1</strong></td><td><strong>Manufacturing</strong></td><td>30</td><td>26</td><td class="pct"><strong>87%</strong></td><td>18 (60%)</td><td>4</td></tr>
+        <tr style="background: #e8f5e9;"><td><strong>2</strong></td><td><strong>Food & Beverages</strong></td><td>33</td><td>28</td><td class="pct"><strong>85%</strong></td><td>15 (45%)</td><td>5</td></tr>
+        <tr style="background: #e8f5e9;"><td><strong>3</strong></td><td><strong>Retail Store</strong></td><td>46</td><td>38</td><td class="pct"><strong>83%</strong></td><td>23 (50%)</td><td>8</td></tr>
+        <tr><td><strong>4</strong></td><td><strong>Personal Services</strong></td><td>42</td><td>34</td><td class="pct"><strong>81%</strong></td><td>20 (48%)</td><td>8</td></tr>
+        <tr><td><strong>5</strong></td><td><strong>Catalog / Direct Sales</strong> <span class="asterisk-marker">*</span></td><td>18</td><td>15</td><td class="pct"><strong>83%</strong></td><td>11 (61%)</td><td>3</td></tr>
+        <tr><td><strong>6</strong></td><td><strong>Minimarket</strong> <span class="asterisk-marker">*</span></td><td>15</td><td>13</td><td class="pct"><strong>87%</strong></td><td>7 (47%)</td><td>2</td></tr>
+        <tr style="background: #fff3e0;"><td><strong>7</strong></td><td><strong>Professional Services</strong> <span class="asterisk-marker">*</span></td><td>21</td><td>14</td><td class="pct"><strong>67%</strong></td><td>10 (48%)</td><td>7</td></tr>
+        <tr style="background: #ffebee;"><td><strong>8</strong></td><td><strong>Online Resale</strong> <span class="asterisk-marker">*</span></td><td>10</td><td>6</td><td class="pct"><strong>60%</strong></td><td>3 (30%)</td><td>4</td></tr>
+        <tr style="background: #fff3e0;"><td><strong>9</strong></td><td><strong>Agriculture</strong> <span class="asterisk-marker">*</span></td><td>4</td><td>4</td><td class="pct"><strong>100%</strong></td><td>-</td><td>0</td></tr>
+    </table>
+    
+    <div class="footnote"><span class="asterisk-marker">*</span> Sample n&lt;30, exploratory data only. Agriculture excluded from strategic recommendations due to minimal sample (n=4).</div>
+    
+    <div class="footer">Page 7 | Stori Luna Market Research v3.1</div>
+</div>
+
+<!-- STRATEGIC RECOMMENDATION: TOP 5 -->
+<div class="page">
+    <h1>Strategic Recommendation: Top 5 Segments to Prioritize</h1>
+    
+    <p style="margin-bottom: 20px; color: #666; font-size: 0.95em;"><strong>Ranking criteria:</strong> (1) Size of segment (n), (2) Recurrent financing need %, (3) Satisfaction %</p>
+    
+    <div class="top-5-box">
+        <div class="top-5-item">
+            <span class="rank">1</span>
+            <span class="name">RETAIL STORE</span>
+            <p class="metrics">Size: 46 users (17% of base) | Recurrent: 59% (27 users) | Satisfaction: 83%</p>
+            <p class="reason"><strong>Why #1:</strong> Largest single segment with highest recurrent need. Inventory-driven businesses need financing every 2-3 months predictably. <strong>Opportunity:</strong> Deploy revolving credit/line of credit product. Potential $5-10M annual volume from inventory cycling alone. Target: Expansion to multi-location retail chains.</p>
+        </div>
+        
+        <div class="top-5-item">
+            <span class="rank">2</span>
+            <span class="name">FOOD & BEVERAGES</span>
+            <p class="metrics">Size: 33 users (12% of base) | Recurrent: 39% | Satisfaction: 85%</p>
+            <p class="reason"><strong>Why #2:</strong> Second largest with strong satisfaction and growth focus (36% use loans to expand). 45% want $20k+ (highest loan sizes). Seasonal patterns clear (45% need 1-2x/year). <strong>Opportunity:</strong> Seasonal financing product, pre-peak inventory loans, ingredient supplier partnerships. Target: Move from home/stand-based to permanent location expansion.</p>
+        </div>
+        
+        <div class="top-5-item">
+            <span class="rank">3</span>
+            <span class="name">MANUFACTURING / PRODUCTION</span>
+            <p class="metrics">Size: 30 users (11% of base) | Recurrent: 43% | Satisfaction: 87% (HIGHEST)</p>
+            <p class="reason"><strong>Why #3:</strong> Highest satisfaction (87%), strongest banking records (27% with bank deposits), most formalized businesses. 60% rate Excellent satisfaction. <strong>Opportunity:</strong> Premium pricing tier, larger loan amounts ($20k+ for 43%), longer terms. Lower risk = margin expansion. Target: Furniture makers, textile producers, artisan food manufacturers - scaling production capacity.</p>
+        </div>
+        
+        <div class="top-5-item">
+            <span class="rank">4</span>
+            <span class="name">PERSONAL SERVICES</span>
+            <p class="metrics">Size: 42 users (16% of base) | Recurrent: 45% | Satisfaction: 81%</p>
+            <p class="reason"><strong>Why #4:</strong> Second-largest segment (42 users) with solid recurrent need and satisfaction. Beauty services dominate (40% of category). <strong>Opportunity:</strong> Equipment financing specialization, beauty school partnerships, salon supply chain integrations. Recurring equipment needs for tools, chairs, supplies. Target: Scale beauty services from home to salon location.</p>
+        </div>
+        
+        <div class="top-5-item">
+            <span class="rank">5</span>
+            <span class="name">PROFESSIONAL SERVICES - TURNAROUND PLAY</span>
+            <p class="metrics">Size: 21 users (8% of base) | Recurrent: 38% | Satisfaction: 67% (AT RISK)</p>
+            <p class="reason"><strong>Why included:</strong> Smallest of top 5, BUT represents untapped opportunity with clear friction point. Only 67% satisfaction vs 85%+ for others. 29% use business loans for personal expenses (vs 13% overall). <strong>Opportunity:</strong> Separate product track for business vs personal loans. Income verification via client references, project-based payment schedules. Fix the product-market fit = potential 20% satisfaction lift. Target: Real estate agents, designers, digital marketers blending business/personal needs.</p>
+        </div>
+    </div>
+    
+    <div class="footer">Page 8 | Stori Luna Market Research v3.1</div>
+</div>
+
+<!-- Q3-Q15: ALL REMAINING QUESTIONS -->
+<div class="page">
+    <h1>Operating Model, Loan Use & Financing Need</h1>
+    
+    <h2>Operating Model Distribution</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Operating Model</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Physical store / establishment</strong></td><td><strong>97</strong></td><td class="pct"><strong>36%</strong></td></tr>
+        <tr><td>Sell from home</td><td>53</td><td class="pct">20%</td></tr>
+        <tr><td>Work at client/employer location</td><td>45</td><td class="pct">17%</td></tr>
+        <tr><td>Online / social media sales</td><td>27</td><td class="pct">10%</td></tr>
+        <tr><td>Hybrid / multiple channels</td><td>21</td><td class="pct">8%</td></tr>
+        <tr><td>Street market / mobile stand</td><td>12</td><td class="pct">4%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267</div>
+    
+    <h2>Primary Use of Loans</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Use Case</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Expand business</strong></td><td><strong>67</strong></td><td class="pct"><strong>25%</strong></td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Buy inventory/merchandise</strong></td><td><strong>56</strong></td><td class="pct"><strong>21%</strong></td></tr>
+        <tr><td>Personal / family expenses</td><td>36</td><td class="pct">13%</td></tr>
+        <tr><td>Cover cash flow gap</td><td>22</td><td class="pct">8%</td></tr>
+        <tr><td>Buy tools / equipment</td><td>21</td><td class="pct">8%</td></tr>
+        <tr><td>Medical emergency</td><td>11</td><td class="pct">4%</td></tr>
+        <tr><td>Other / mixed uses</td><td>16</td><td class="pct">6%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267</div>
+    
+    <h2>Financing Frequency</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Frequency</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Almost monthly (12+x/year)</strong></td><td><strong>42</strong></td><td class="pct"><strong>16%</strong></td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Every 2-3 months (4-6x/year)</strong></td><td><strong>73</strong></td><td class="pct"><strong>27%</strong></td></tr>
+        <tr><td>1-2x per year</td><td>103</td><td class="pct">39%</td></tr>
+        <tr><td>No financing need</td><td>49</td><td class="pct">18%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267 | <strong>Recurring (2+ loans/year):</strong> 115 users (43%)</div>
+    
+    <h2>Alternative Financing Sources</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Financing Source</th><th>Count</th><th>%</th></tr>
+        <tr><td>Credit cards</td><td>56</td><td class="pct">21%</td></tr>
+        <tr><td>Stori only (exclusive)</td><td>45</td><td class="pct">17%</td></tr>
+        <tr><td>Rotating savings / tandas</td><td>26</td><td class="pct">10%</td></tr>
+        <tr><td>Other financial institutions</td><td>25</td><td class="pct">9%</td></tr>
+        <tr><td>Supplier credit</td><td>17</td><td class="pct">6%</td></tr>
+        <tr><td>Bank loans</td><td>15</td><td class="pct">6%</td></tr>
+        <tr><td>Family / friends</td><td>14</td><td class="pct">5%</td></tr>
+        <tr><td>Other sources</td><td>29</td><td class="pct">11%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267 | Multiple responses allowed</div>
+    
+    <h2>Improvement Requests</h2>
+    <p><strong>Base (n):</strong> 267 respondents | 80% report no improvements needed</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Improvement Requested</th><th>Count</th><th>%</th></tr>
+        <tr><td>Lower interest rates</td><td>12</td><td class="pct">5%</td></tr>
+        <tr><td>Monthly payment options</td><td>10</td><td class="pct">4%</td></tr>
+        <tr><td>Higher loan limits</td><td>6</td><td class="pct">2%</td></tr>
+        <tr><td>Faster approval</td><td>4</td><td class="pct">2%</td></tr>
+        <tr><td>Less aggressive collection</td><td>3</td><td class="pct">1%</td></tr>
+        <tr><td>No improvements needed</td><td>212</td><td class="pct">79%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267</div>
+    
+    <div class="footer">Page 9 | Stori Luna Market Research v3.1</div>
+</div>
+
+<div class="page">
+    <h1>Loan Amounts, Payment Preferences & Income Details</h1>
+    
+    <h2>Preferred Amount for Personal Needs</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Amount Range (MXN)</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #f0f9f6;"><td><strong>More than $20,000</strong></td><td><strong>91</strong></td><td class="pct"><strong>34%</strong></td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>$10,001 - $20,000</strong></td><td><strong>119</strong></td><td class="pct"><strong>45%</strong></td></tr>
+        <tr><td>$5,001 - $10,000</td><td>39</td><td class="pct">15%</td></tr>
+        <tr><td>$2,001 - $5,000</td><td>11</td><td class="pct">4%</td></tr>
+        <tr><td>Up to $2,000</td><td>1</td><td class="pct">0%</td></tr>
+        <tr><td>Unsure</td><td>6</td><td class="pct">2%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267 | <strong>Want $10k+:</strong> 79% (210 users)</div>
+    
+    <h2>Preferred Amount for Business Needs</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Amount Range (MXN)</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #f0f9f6;"><td><strong>More than $20,000</strong></td><td><strong>107</strong></td><td class="pct"><strong>40%</strong></td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>$10,001 - $20,000</strong></td><td><strong>101</strong></td><td class="pct"><strong>38%</strong></td></tr>
+        <tr><td>$5,001 - $10,000</td><td>41</td><td class="pct">15%</td></tr>
+        <tr><td>$2,001 - $5,000</td><td>8</td><td class="pct">3%</td></tr>
+        <tr><td>Up to $2,000</td><td>4</td><td class="pct">1%</td></tr>
+        <tr><td>Unsure</td><td>6</td><td class="pct">2%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267 | <strong>Want $10k+:</strong> 78% (208 users) | Business needs average 10% higher than personal</div>
+    
+    <h2>Payment Structure Preferences</h2>
+    <p><strong>Base (n):</strong> 173 respondents (94 skipped this question)</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Payment Structure</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Fixed monthly payments</strong></td><td><strong>82</strong></td><td class="pct"><strong>47%</strong></td></tr>
+        <tr><td>Pay as fast as possible (accelerated)</td><td>40</td><td class="pct">23%</td></tr>
+        <tr><td>Frequent small payments (weekly/bi-weekly)</td><td>28</td><td class="pct">16%</td></tr>
+        <tr><td>Flexible based on income variability</td><td>19</td><td class="pct">11%</td></tr>
+        <tr><td>No preference / other</td><td>4</td><td class="pct">2%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 173 | Note: 70% want non-standard structures (flexible, accelerated, or frequent payments)</div>
+    
+    <h2>Income Verification Capabilities</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Verification Method</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #ffebee;"><td><strong>No clear way to prove income</strong></td><td><strong>53</strong></td><td class="pct"><strong>20%</strong></td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Frequent bank deposits</strong></td><td><strong>46</strong></td><td class="pct"><strong>17%</strong></td></tr>
+        <tr style="background: #f0f9f6;"><td><strong>Bank statements</strong></td><td><strong>44</strong></td><td class="pct"><strong>16%</strong></td></tr>
+        <tr><td>Invoices / receipts</td><td>17</td><td class="pct">6%</td></tr>
+        <tr><td>Sales notebook / manual log</td><td>15</td><td class="pct">6%</td></tr>
+        <tr><td>Transfers / terminal payments</td><td>10</td><td class="pct">4%</td></tr>
+        <tr><td>Multiple formal methods</td><td>19</td><td class="pct">7%</td></tr>
+        <tr><td>Other / no answer</td><td>63</td><td class="pct">24%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267 | <strong>Underbanked opportunity:</strong> 25% (68 users) have no clear income documentation</div>
+    
+    <h2>Income Stability</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Variability Level</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #e8f5e9;"><td><strong>Very stable / predictable</strong></td><td><strong>122</strong></td><td class="pct"><strong>46%</strong></td></tr>
+        <tr><td>Somewhat variable</td><td>116</td><td class="pct">43%</td></tr>
+        <tr style="background: #fff3e0;"><td><strong>Very variable</strong></td><td><strong>29</strong></td><td class="pct"><strong>11%</strong></td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267 | 54% have variable income (moderate or high)</div>
+    
+    <h2>Payment Difficulty Factors</h2>
+    <p><strong>Base (n):</strong> 267 respondents</p>
+    <table class="data-table" style="font-size: 0.9em;">
+        <tr><th>Payment Difficulty Reason</th><th>Count</th><th>%</th></tr>
+        <tr style="background: #ffebee;"><td><strong>Unexpected emergencies</strong></td><td><strong>183</strong></td><td class="pct"><strong>69%</strong></td></tr>
+        <tr><td>Income fluctuations</td><td>31</td><td class="pct">12%</td></tr>
+        <tr style="background: #e8f5e9;"><td><strong>No difficulty</strong></td><td><strong>46</strong></td><td class="pct"><strong>17%</strong></td></tr>
+        <tr><td>Other reasons</td><td>7</td><td class="pct">3%</td></tr>
+    </table>
+    <div class="data-table-note"><strong>Base (n):</strong> 267 | Note: 69% cite emergencies - suggests need for payment pause/emergency reserve features</div>
+    
+    
+    
+    
+    <div class="footer">Page 10-11 | Stori Luna Market Research v3.1</div>
+</div>
+
+<!-- CONCLUSIONS -->
+<div class="page">
+    <h1>Strategic Conclusions</h1>
+    
+    <h2>Market Opportunity Summary</h2>
+    <div class="insights">
+        <ul>
+            <li><strong>Core Market: 151 users (57%)</strong> across Retail + Personal Services + Food segments. High recurrent need (40-59%), strong satisfaction (81-85%), large average loan sizes ($15-20k). Annual volume potential: $15-25M.</li>
+            <li><strong>Quality Tier: 30 manufacturing users.</strong> Highest satisfaction (87%), best documentation, 43% recurrent. Premium pricing opportunity with lower risk. Volume: $3-5M annual.</li>
+            <li><strong>Turnaround Opportunity: 21 professional services users.</strong> Friction point (67% satisfaction) due to business/personal blending. Product redesign could lift satisfaction 20%+ and unlock $2-3M annual.</li>
+            <li><strong>Growth Watch: 10 online resale users.</strong> Smallest segment but fastest-growing channel. Lowest satisfaction (60%) requires distinct digital-native product. Monitor for inflection point.</li>
+        </ul>
+    </div>
+    
+    <h2>Product Recommendations</h2>
+    <div class="insights">
+        <ul>
+            <li><strong>Deploy Revolving Credit:</strong> 43% (115 users) need 2+ loans/year. Retail (59%) and Personal Services (45%) lead. Creates stickiness and higher lifetime value.</li>
+            <li><strong>Seasonal Financing:</strong> Food businesses show 45% annual-only pattern. Pre-peak inventory financing (pre-Navidad, Día de Muertos) could capture seasonal working capital needs.</li>
+            <li><strong>Alternative Income Verification:</strong> 20% (53 users) have no clear income documentation. Use transaction-based scoring, utility bills, supplier verification, client references.</li>
+            <li><strong>Payment Flexibility:</strong> 69% cite emergencies as payment barrier. Offer payment pause, emergency reserve, or income-smoothing features.</li>
+        </ul>
+    </div>
+    
+    <h2>Segments to Monitor (Not Prioritize Yet)</h2>
+    <ul style="margin-left: 20px;">
+        <li><strong>Catalog / Direct Sales (18 users, 83% satisfaction):</strong> MLM/network marketing shows high retention. Seasonal commission cycles = commission-advance product opportunity. Monitor as secondary play.</li>
+        <li><strong>Minimarket (15 users, 87% satisfaction):</strong> Steady-state business (27% recurrent), limited growth. Defensive play to retain existing users with ecosystem products.</li>
+    </ul>
+    
+    <div class="footer">Page 12 | Stori Luna Market Research v3.1</div>
+</div>
+
+</body>
+</html>
